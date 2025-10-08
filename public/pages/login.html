@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar - Sistema Agrícola Digital</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🌾 Sistema Agrícola Digital</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="/">Início</a>
+                <a href="/pages/register.html">Criar Conta</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="auth-container">
+        <h2>Entrar na Conta</h2>
+
+        <div id="alertContainer"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="form-submit">Entrar</button>
+        </form>
+
+        <div class="form-footer">
+            <p>Não tem uma conta? <a href="/pages/register.html">Criar Conta</a></p>
+        </div>
+    </div>
+
+    <script src="/js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - Sistema Agrícola Digital</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🌾 Sistema Agrícola Digital</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="/">Início</a>
+                <a href="/pages/products.html">Produtos</a>
+                <a href="/pages/dashboard.html" id="dashboardLink">Dashboard</a>
+                <a href="/pages/login.html" id="loginLink">Entrar</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Produtos Disponíveis</h2>
+                    <div>
+                        <input type="text" id="searchInput" placeholder="Buscar produtos..." style="padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 8px; margin-right: 8px;">
+                        <select id="categoryFilter" style="padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 8px;">
+                            <option value="">Todas Categorias</option>
+                            <option value="Grãos">Grãos</option>
+                            <option value="Frutas">Frutas</option>
+                            <option value="Vegetais">Vegetais</option>
+                            <option value="Legumes">Legumes</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="productsContainer">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Carregando produtos...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalhes do Produto</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="/js/products.js"></script>
+</body>
+</html>

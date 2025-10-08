@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fornecedores - Sistema Agrícola Digital</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🌾 Sistema Agrícola Digital</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="/">Início</a>
+                <a href="/pages/products.html">Produtos</a>
+                <a href="/pages/suppliers.html">Fornecedores</a>
+                <a href="/pages/login.html">Entrar</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Fornecedores de Insumos Agrícolas</h2>
+                    <div>
+                        <input type="text" id="searchInput" placeholder="Buscar produtos..." style="padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 8px; margin-right: 8px;">
+                        <select id="categoryFilter" style="padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 8px;">
+                            <option value="">Todas Categorias</option>
+                            <option value="sementes">Sementes</option>
+                            <option value="defensivos">Defensivos</option>
+                            <option value="fertilizantes">Fertilizantes</option>
+                            <option value="equipamentos">Equipamentos</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="productsContainer">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Carregando produtos...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = window.location.origin + '/api';
+
+        async function loadSupplierProducts(search = '', category = '') {
+            try {
+                let url = `${API_BASE_URL}/supplier/products?`;
+                if (search) url += `search=${search}&`;
+                if (category) url += `category=${category}&`;
+
+                const response = await fetch(url);
+                const data = await response.json();
+
+                displayProducts(data.products || []);
+            } catch (error) {
+                console.error('Erro ao carregar produtos:', error);
+                document.getElementById('productsContainer').innerHTML = `
+                    <div class="alert alert-error">Erro ao carregar produtos</div>
+                `;
+            }
+        }
+
+        function displayProducts(products) {
+            const container = document.getElementById('productsContainer');
+
+            if (products.length === 0) {
+                container.innerHTML = '<p style="text-align: center; padding: 40px;">Nenhum produto encontrado</p>';
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="product-grid">
+                    ${products.map(product => `
+                        <div class="product-card">
+                            <img src="${product.photo_url || 'https://images.pexels.com/photos/2132171/pexels-photo-2132171.jpeg?auto=compress&w=400'}"
+                                 class="product-image"
+                                 alt="${product.name}">
+                            <div class="product-content">
+                                <h3 class="product-title">${product.name}</h3>
+                                <p class="product-price">${product.price} MT</p>
+                                <p class="product-info">Categoria: ${product.category}</p>
+                                <p class="product-info">Estoque: ${product.stock_quantity}</p>
+                                ${product.suppliers ? `
+                                    <p class="product-info">Fornecedor: ${product.suppliers.company_name}</p>
+                                    ${product.suppliers.users?.phone ? `
+                                        <p class="product-info">Contato: ${product.suppliers.users.phone}</p>
+                                    ` : ''}
+                                ` : ''}
+                                ${product.description ? `
+                                    <p class="product-info" style="margin-top: 8px;">${product.description}</p>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const search = e.target.value;
+            const category = document.getElementById('categoryFilter').value;
+            loadSupplierProducts(search, category);
+        });
+
+        document.getElementById('categoryFilter').addEventListener('change', (e) => {
+            const search = document.getElementById('searchInput').value;
+            const category = e.target.value;
+            loadSupplierProducts(search, category);
+        });
+
+        loadSupplierProducts();
+    </script>
+</body>
+</html>

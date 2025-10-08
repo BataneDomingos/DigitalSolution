@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema Agrícola Digital</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🌾 Sistema Agrícola Digital</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="/pages/dashboard.html">Dashboard</a>
+                <a href="/pages/products.html">Produtos</a>
+                <a href="/pages/chat.html">Chat</a>
+                <a href="#" id="logoutBtn">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard container">
+        <div class="dashboard-header">
+            <h1>Bem-vindo, <span id="userName">Usuário</span>!</h1>
+            <div>
+                <span id="userType" class="badge"></span>
+            </div>
+        </div>
+
+        <div id="dashboardContent">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Carregando...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

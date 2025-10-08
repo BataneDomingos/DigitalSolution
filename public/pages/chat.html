@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - Sistema Agrícola Digital</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🌾 Sistema Agrícola Digital</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="/pages/dashboard.html">Dashboard</a>
+                <a href="/pages/products.html">Produtos</a>
+                <a href="/pages/chat.html">Chat</a>
+                <a href="#" id="logoutBtn">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard">
+            <h1>Sistema de Mensagens</h1>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>💬 Chatbot Assistente</h2>
+                    <select id="chatbotLanguage" style="padding: 8px; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <option value="pt">Português</option>
+                        <option value="en">English</option>
+                        <option value="sena">Sena</option>
+                    </select>
+                </div>
+
+                <div class="chat-messages" id="chatbotMessages" style="min-height: 300px; max-height: 400px;">
+                    <div class="message received">
+                        <p>Olá! Como posso ajudá-lo hoje?</p>
+                    </div>
+                </div>
+
+                <div class="chat-input">
+                    <form id="chatbotForm">
+                        <input type="text" id="chatbotInput" placeholder="Digite sua mensagem..." required>
+                        <button type="submit" class="btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Conversas</h2>
+                </div>
+
+                <div id="conversationsContainer">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Carregando conversas...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/chat.js"></script>
+</body>
+</html>

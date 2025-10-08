@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooperativas - Sistema Agrícola Digital</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🌾 Sistema Agrícola Digital</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="/">Início</a>
+                <a href="/pages/products.html">Produtos</a>
+                <a href="/pages/cooperatives.html">Cooperativas</a>
+                <a href="/pages/login.html">Entrar</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Cooperativas Agrícolas</h2>
+                </div>
+
+                <p style="margin-bottom: 24px;">Junte-se a uma cooperativa e fortaleça suas vendas através da união de agricultores</p>
+
+                <div id="cooperativesContainer">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Carregando cooperativas...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = window.location.origin + '/api';
+
+        async function loadCooperatives() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/cooperative`);
+                const data = await response.json();
+
+                displayCooperatives(data.cooperatives || []);
+            } catch (error) {
+                console.error('Erro ao carregar cooperativas:', error);
+                document.getElementById('cooperativesContainer').innerHTML = `
+                    <div class="alert alert-error">Erro ao carregar cooperativas</div>
+                `;
+            }
+        }
+
+        function displayCooperatives(cooperatives) {
+            const container = document.getElementById('cooperativesContainer');
+
+            if (cooperatives.length === 0) {
+                container.innerHTML = '<p style="text-align: center; padding: 40px;">Nenhuma cooperativa encontrada</p>';
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="product-grid">
+                    ${cooperatives.map(coop => `
+                        <div class="product-card">
+                            <div class="product-content">
+                                <h3 class="product-title">${coop.name}</h3>
+                                <p class="product-info">${coop.description || 'Sem descrição'}</p>
+                                <p class="product-info"><strong>Localização:</strong> ${coop.location || 'Não especificada'}</p>
+                                ${coop.leader?.users ? `
+                                    <p class="product-info"><strong>Líder:</strong> ${coop.leader.users.full_name}</p>
+                                ` : ''}
+                                ${coop.cooperative_members ? `
+                                    <p class="product-info"><strong>Membros:</strong> ${coop.cooperative_members.length || 0}</p>
+                                ` : ''}
+                                <div class="product-actions" style="margin-top: 16px;">
+                                    <button class="btn-primary btn-small" onclick="viewCooperative('${coop.id}')">Ver Detalhes</button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function viewCooperative(id) {
+            window.location.href = `/pages/cooperative-details.html?id=${id}`;
+        }
+
+        loadCooperatives();
+    </script>
+</body>
+</html>

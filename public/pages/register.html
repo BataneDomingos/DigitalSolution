@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta - Sistema Agrícola Digital</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🌾 Sistema Agrícola Digital</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="/">Início</a>
+                <a href="/pages/login.html">Entrar</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="auth-container">
+        <h2>Criar Conta</h2>
+
+        <div id="alertContainer"></div>
+
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="full_name">Nome Completo *</label>
+                <input type="text" id="full_name" name="full_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha *</label>
+                <input type="password" id="password" name="password" required minlength="6">
+            </div>
+
+            <div class="form-group">
+                <label for="user_type">Tipo de Usuário *</label>
+                <select id="user_type" name="user_type" required>
+                    <option value="">Selecione...</option>
+                    <option value="agricultor">Agricultor</option>
+                    <option value="comprador">Comprador</option>
+                    <option value="transportador">Transportador</option>
+                    <option value="fornecedor">Fornecedor de Produtos Agrícolas</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Telefone</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+
+            <div class="form-group">
+                <label for="city">Cidade</label>
+                <input type="text" id="city" name="city">
+            </div>
+
+            <div class="form-group">
+                <label for="province">Província</label>
+                <select id="province" name="province">
+                    <option value="">Selecione...</option>
+                    <option value="Maputo">Maputo</option>
+                    <option value="Gaza">Gaza</option>
+                    <option value="Inhambane">Inhambane</option>
+                    <option value="Sofala">Sofala</option>
+                    <option value="Manica">Manica</option>
+                    <option value="Tete">Tete</option>
+                    <option value="Zambézia">Zambézia</option>
+                    <option value="Nampula">Nampula</option>
+                    <option value="Cabo Delgado">Cabo Delgado</option>
+                    <option value="Niassa">Niassa</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Endereço</label>
+                <textarea id="address" name="address" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="language">Idioma Preferido</label>
+                <select id="language" name="language">
+                    <option value="pt">Português</option>
+                    <option value="en">English</option>
+                    <option value="sena">Sena</option>
+                </select>
+            </div>
+
+            <button type="submit" class="form-submit">Criar Conta</button>
+        </form>
+
+        <div class="form-footer">
+            <p>Já tem uma conta? <a href="/pages/login.html">Entrar</a></p>
+        </div>
+    </div>
+
+    <script src="/js/register.js"></script>
+</body>
+</html>
